@@ -1,0 +1,15 @@
+azure-identity>=1.19.0
+azure-ai-projects>=2.0.0
+azure-search-documents>=11.6.0
+azure-storage-file-datalake>=12.17.0
+pyodbc>=5.1.0
+pandas>=2.2.0
+plotly>=5.24.0
+streamlit>=1.40.0
+fastapi>=0.115.0
+uvicorn>=0.32.0
+scikit-learn>=1.5.0
+python-dotenv>=1.0.0
+pydantic>=2.9.0
+faker>=26.0.0
+numpy>=1.26.0

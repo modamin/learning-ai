@@ -1,0 +1,17 @@
+# Environment / secrets
+.env
+
+# uv / Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+
+# Generated data (large files)
+data/
+
+# Streamlit
+.streamlit/
+
+# IDE
+.vscode/settings.json
