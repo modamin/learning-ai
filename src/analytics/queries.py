@@ -297,6 +297,26 @@ class FabricAnalytics:
 
     # ── Training data for ML model ────────────────────────────────────────────
 
+    def get_interaction_matrix_data(self) -> pd.DataFrame:
+        """
+        One row per (learner_email, course_id) with interaction signals.
+
+        Used to build the collaborative-filtering interaction matrix.
+        Columns: learner_email, course_id, event_count, completed, avg_score
+        """
+        sql = """
+            SELECT
+                learner_email,
+                course_id,
+                COUNT(*)                                                        AS event_count,
+                MAX(CASE WHEN course_completed = 1 THEN 1 ELSE 0 END)          AS completed,
+                ROUND(AVG(CASE WHEN verb = 'scored' THEN score ELSE NULL END), 4) AS avg_score
+            FROM silver_xapi_events
+            GROUP BY learner_email, course_id
+            HAVING COUNT(*) >= 2
+        """
+        return self._df(sql)
+
     def get_training_features(self) -> pd.DataFrame:
         """
         Build the feature matrix for dropout prediction from silver_xapi_events.

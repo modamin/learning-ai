@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(uv run python -c ':*)",
+      "Bash(python -c \"import openai; print\\(openai.__version__\\)\")"
+    ]
+  }
+}

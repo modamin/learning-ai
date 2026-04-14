@@ -343,7 +343,7 @@ def main() -> None:
                     info["feature_importances"].items(),
                     columns=["Feature", "Importance"]
                 ).sort_values("Importance", ascending=False)
-                st.dataframe(fi_df, hide_index=True, use_container_width=True)
+                st.dataframe(fi_df, hide_index=True, width='stretch')
             except Exception as exc:
                 st.warning(f"Model not available: {exc}")
 
@@ -368,14 +368,14 @@ def main() -> None:
         with col_a:
             try:
                 funnel_rows = fetch_funnel(selected_course_id)
-                st.plotly_chart(_funnel_chart(funnel_rows), use_container_width=True)
+                st.plotly_chart(_funnel_chart(funnel_rows), width='stretch')
             except Exception as exc:
                 st.error(f"Funnel: {exc}")
 
         with col_b:
             try:
                 heatmap_rows = fetch_heatmap(selected_course_id)
-                st.plotly_chart(_heatmap_chart(heatmap_rows), use_container_width=True)
+                st.plotly_chart(_heatmap_chart(heatmap_rows), width='stretch')
             except Exception as exc:
                 st.error(f"Heatmap: {exc}")
     else:
@@ -386,21 +386,21 @@ def main() -> None:
     with col_c:
         try:
             gap_rows = fetch_skill_gaps(selected_dept)
-            st.plotly_chart(_radar_chart(gap_rows, selected_dept), use_container_width=True)
+            st.plotly_chart(_radar_chart(gap_rows, selected_dept), width='stretch')
         except Exception as exc:
             st.error(f"Skill gaps: {exc}")
 
     with col_d:
         try:
             fmt_rows = fetch_format_comparison()
-            st.plotly_chart(_format_comparison_chart(fmt_rows), use_container_width=True)
+            st.plotly_chart(_format_comparison_chart(fmt_rows), width='stretch')
         except Exception as exc:
             st.error(f"Format comparison: {exc}")
 
     # ── Row 3: Course scatter ──────────────────────────────────────────────────
     try:
         ranking_rows = fetch_course_ranking()
-        st.plotly_chart(_scatter_chart(ranking_rows), use_container_width=True)
+        st.plotly_chart(_scatter_chart(ranking_rows), width='stretch')
     except Exception as exc:
         st.error(f"Course scatter: {exc}")
 
@@ -454,7 +454,7 @@ def main() -> None:
                     return colors.get(str(val), "")
 
                 styled = df_display.style.map(_color_risk, subset=["Risk"]) if "Risk" in df_display.columns else df_display.style
-                st.dataframe(styled, use_container_width=True, hide_index=True)
+                st.dataframe(styled, width='stretch', hide_index=True)
                 st.caption(f"{len(df_risk)} learners inactive >7 days who haven't completed the course.")
             else:
                 st.success("No at-risk learners for this course.")
